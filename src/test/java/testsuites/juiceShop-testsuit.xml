@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Juice Shop-Tests" parallel="tests" thread-count="1">
+  <test name="Juice Shop-Tests">
+    <classes>
+      <class name="org.juice_shop.UpdateProductTest"/>
+      <class name="org.juice_shop.AuthenticationTest"/>
+    </classes>
+  </test>
+</suite>

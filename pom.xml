@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.example</groupId>
+  <artifactId>juice-shop-test</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>juice-shop-test</name>
+  <url>http://maven.apache.org</url>
+
+  <!-- properties for test config given as maven run command parameter -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <allure-maven.version>2.12.0</allure-maven.version>
+    <allure-maven-plugin.version>2.12.0</allure-maven-plugin.version>
+    <allure-maven-report.version>2.10.0</allure-maven-report.version>
+    <allure-maven.version>2.12.0</allure-maven.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <aspectj.version>1.9.22.1</aspectj.version>
+    <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+    <nimbus-jose-jwt.version>9.40</nimbus-jose-jwt.version>
+    <suiteFile/>
+    <envConfig/>
+  </properties>
+
+  <dependencies>
+
+    <!-- We need this dependency to call .filter(new AllureRestAssured()) on restassured requests -->
+    <dependency>
+      <artifactId>allure-rest-assured</artifactId>
+      <groupId>io.qameta.allure</groupId>
+      <version>2.27.0</version>
+    </dependency>
+
+    <dependency>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <version>1.18.32</version>
+    </dependency>
+
+    <dependency>
+      <artifactId>selenium-java</artifactId>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <version>4.21.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.github.bonigarcia</groupId>
+      <artifactId>webdrivermanager</artifactId>
+      <version>5.8.0</version>
+    </dependency>
+    <!--  log4j is used for logging used in Logger -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.23.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.23.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j2-impl</artifactId>
+      <version>2.23.1</version>
+    </dependency>
+
+    <!--  TestNG is used for verification   -->
+    <dependency>
+      <artifactId>testng</artifactId>
+      <groupId>org.testng</groupId>
+      <version>7.10.2</version>
+    </dependency>
+
+    <!-- required by Allure web view -->
+    <!-- required by Allure web view -->
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-testng</artifactId>
+      <scope>test</scope>
+      <version>2.27.0</version>
+    </dependency>
+
+    <!-- is used to create payload from JSON -->
+    <dependency>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <version>2.17.1</version>
+    </dependency>
+
+    <dependency>
+      <artifactId>rest-assured</artifactId>
+      <groupId>io.rest-assured</groupId>
+      <version>5.4.0</version>
+    </dependency>
+
+    <!-- is used for comparing to lists CollectionUtils.isEqualCollection -->
+    <dependency>
+      <artifactId>commons-validator</artifactId>
+      <groupId>commons-validator</groupId>
+      <version>1.9.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-text</artifactId>
+      <version>1.12.0</version>
+    </dependency>
+
+    <!-- Dependencies related to API coverage -->
+
+    <!-- OpenApi parser -->
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.17.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.17.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nimbusds</groupId>
+      <artifactId>nimbus-jose-jwt</artifactId>
+      <version>${nimbus-jose-jwt.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <release>17</release>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <nonFilteredFileExtensions>
+            <nonFilteredFileExtension>pdf</nonFilteredFileExtension>
+          </nonFilteredFileExtensions>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <artifactId>maven-filtering</artifactId>
+            <groupId>org.apache.maven.shared</groupId>
+            <version>3.3.2</version>
+          </dependency>
+        </dependencies>
+        <version>3.3.1</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+        <configuration>
+          <skip>true</skip>
+          <trimStackTrace>false</trimStackTrace>
+          <argLine>-Xmx2048m</argLine>
+        </configuration>
+        <executions>
+          <execution>
+            <id>integration-tests</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <skip>false</skip>
+              <suiteXmlFiles>
+                <suiteXmlFile>src/test/java/testsuites/${suiteFile}</suiteXmlFile>
+              </suiteXmlFiles>
+              <systemPropertyVariables>
+                <environment>${envConfig}</environment>
+                <allure.results.directory>target/allure-results</allure.results.directory>
+              </systemPropertyVariables>
+              <argLine>
+                -Xms500m -Xmx4096m -XX:MaxMetaspaceSize=256m -XX:ReservedCodeCacheSize=256m
+                -XX:MaxDirectMemorySize=3072m -Xshare:off
+                -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+              </argLine>
+              <testFailureIgnore>true</testFailureIgnore>
+              <useSystemClassLoader>false</useSystemClassLoader>
+            </configuration>
+          </execution>
+
+        </executions>
+        <dependencies>
+          <dependency>
+            <artifactId>aspectjweaver</artifactId>
+            <groupId>org.aspectj</groupId>
+            <version>${aspectj.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>${allure-maven.version}</version>
+      </plugin>
+
+    </plugins>
+
+  </build>
+  <reporting>
+    <excludeDefaults>true</excludeDefaults>
+    <plugins>
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>${allure-maven-plugin.version}</version>
+        <configuration>
+          <reportVersion>${allure-maven-report.version}</reportVersion>
+          <inputDirectories>${basedir}/target/allure-results</inputDirectories>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </reporting>
+</project>
