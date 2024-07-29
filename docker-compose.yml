@@ -1,0 +1,33 @@
+services:
+  juice-shop:
+    image: bkimminich/juice-shop
+    container_name: juice-shop
+    ports:
+      - "3000:3000"
+    networks:
+      - test-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    environment:
+      NODE_ENV: "production"
+
+  integration-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: integration-tests
+    depends_on:
+      juice-shop:
+        condition: service_healthy
+    networks:
+      - test-net
+    volumes:
+      - ./allure-results-from-network:/usr/src/app/target
+    environment:
+      - TEST_URL=http://juice-shop:3000
+
+networks:
+  test-net:
