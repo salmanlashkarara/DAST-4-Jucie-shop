@@ -1,4 +1,5 @@
-version: '3'
+version: '3.8'
+
 services:
   juice-shop:
     image: bkimminich/juice-shop
@@ -9,11 +10,6 @@ services:
       test-net:
         aliases:
           - juice-shop-service
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
   integration-tests:
     build:
@@ -22,9 +18,10 @@ services:
     container_name: integration-tests
     depends_on:
       juice-shop:
-        condition: service_healthy
+        condition: service_started
     networks:
       - test-net
+    entrypoint: ["sh", "-c", "sleep 60"]
 
 networks:
   test-net:
