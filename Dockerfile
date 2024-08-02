@@ -20,3 +20,6 @@ RUN mvn clean install -DskipTests
 
 # Define the entry point to run the tests
 ENTRYPOINT ["sh", "-c", "mvn site -DenvConfig=default -DsuiteFile=juiceShop-testsuit.xml -DremoteExecution=false -Dmaven.wagon.http.pool=false -Dhttp.keepAlive=false allure:report && exec sleep infinity"]
+
+# Keep container alive
+CMD ["tail", "-f", "/dev/null"]
