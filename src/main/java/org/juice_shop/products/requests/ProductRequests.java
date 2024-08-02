@@ -11,7 +11,7 @@ import org.juice_shop.products.resources.ProductResources;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ProductRequests {
 
-  private static final String LOCAL_HOST = "http://localhost:3000";
+  private static final String LOCAL_HOST = "http://juice-shop-service:3000";
 
   @Step("Update single product")
   public static void updateProduct(int productId, String payload) {
