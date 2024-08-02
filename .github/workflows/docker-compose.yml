@@ -23,7 +23,7 @@ jobs:
         run: docker-compose up --build -d
 
       - name: Wait for containers to be ready
-        run: sleep 30 # Adjust the time as necessary to allow your containers to initialize
+        run: sleep 180 # Adjust the time as necessary to allow your containers to initialize
 
       - name: Copy artifacts from integration-tests container
         run: |
