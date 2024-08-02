@@ -25,10 +25,6 @@ services:
         condition: service_healthy
     networks:
       - test-net
-    volumes:
-      - ./allure-results-from-network:/usr/src/app/target
-    environment:
-      - TEST_URL=http://juice-shop-service:3000
 
 networks:
   test-net:
