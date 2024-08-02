@@ -15,11 +15,8 @@ COPY pom.xml /app/
 # Copy the entire source code to the container
 COPY src /app/src
 
-# Install dependencies and package the application
-RUN mvn clean install -DskipTests
-
 # Define the entry point to run the tests
-ENTRYPOINT ["sh", "-c", "mvn site -DenvConfig=default -DsuiteFile=juiceShop-testsuit.xml -DremoteExecution=false -Dmaven.wagon.http.pool=false -Dhttp.keepAlive=false allure:report && exec sleep infinity"]
+RUN mvn clean install site -DenvConfig=default -DsuiteFile=juiceShop-testsuit.xml -DremoteExecution=false -Dmaven.wagon.http.pool=false -Dhttp.keepAlive=false allure:report
 
 # Keep container alive
 CMD ["tail", "-f", "/dev/null"]

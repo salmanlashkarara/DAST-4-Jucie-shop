@@ -1,3 +1,4 @@
+version: '3'
 services:
   juice-shop:
     image: bkimminich/juice-shop
@@ -5,14 +6,14 @@ services:
     ports:
       - "3000:3000"
     networks:
-      - test-net
+      test-net:
+        aliases:
+          - juice-shop-service
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000"]
       interval: 30s
       timeout: 10s
       retries: 3
-    environment:
-      NODE_ENV: "production"
 
   integration-tests:
     build:
@@ -27,7 +28,8 @@ services:
     volumes:
       - ./allure-results-from-network:/usr/src/app/target
     environment:
-      - TEST_URL=http://juice-shop:3000
+      - TEST_URL=http://juice-shop-service:3000
 
 networks:
   test-net:
+    driver: bridge
