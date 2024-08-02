@@ -23,6 +23,16 @@ services:
       - test-net
     entrypoint: ["sh", "-c", "sleep 60"]
 
+  zap-proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile-ZAP
+    container_name: ZAP
+    networks:
+      test-net:
+        aliases:
+          - zap-service
+
 networks:
   test-net:
     driver: bridge
