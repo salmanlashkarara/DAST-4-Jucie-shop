@@ -1,4 +1,4 @@
-name: Juice-Shop-Integration-Test
+name: Run Docker Compose
 
 on:
   workflow_dispatch:
@@ -35,10 +35,12 @@ jobs:
       - name: Wait for tests to complete
         run: sleep 60  # Adjust based on test duration
 
+      - name: Retrieve and display test logs
+        run: docker logs integration-test-container
+
       - name: Copy Allure Report from Docker container
         run: |
           docker cp integration-test-container:/app/target/site/allure-report ./allure-report
-        # Ensure the directory exists in case of errors
         continue-on-error: true
 
       - name: Deploy Allure Report to GitHub Pages
