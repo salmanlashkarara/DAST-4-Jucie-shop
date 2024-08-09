@@ -44,8 +44,8 @@ jobs:
           docker stop integration-test-container
           docker rm integration-test-container
 
-      - name: Upload Allure report as artifact
+      - name: Upload HTML report
         uses: actions/upload-artifact@v3
         with:
-          name: allure-report
-          path: target
+          name: test-report
+          path: app/target/site/allure-maven.html
