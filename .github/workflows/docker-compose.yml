@@ -19,8 +19,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install docker-compose -y
 
-      - name: Build and run Docker Compose
-        run: docker-compose up --build -d
+      - name: Run Juice-shop on port 3000
+        run: docker run -p 3000:3000 bkimminich/juice-shop
 
       - name: Check if Juice Shop is up and running
         run: |
@@ -33,21 +33,3 @@ jobs:
             echo "Waiting for Juice Shop to start..."
             sleep 10
           done
-
-      - name: Wait for containers to be ready
-        run: sleep 180 # Adjust the time as necessary to allow your containers to initialize
-
-      - name: Copy artifacts from integration-tests container
-        run: |
-          docker cp integration-tests:/app/target ./target
-          echo "Artifact copied to ./target"
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: integration-tests-artifacts
-          path: ./target
-
-      - name: Tear down Docker Compose
-        if: always()
-        run: docker-compose down
