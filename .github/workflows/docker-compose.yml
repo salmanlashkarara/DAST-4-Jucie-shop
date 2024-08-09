@@ -17,17 +17,32 @@ jobs:
       - name: Run Juice-shop on port 3000
         run: docker run -d -p 3000:3000 bkimminich/juice-shop
 
-      - name: check curl version
+      - name: Check curl version
         run: curl --version
 
       - name: Wait for the Juice Shop to be ready
         run: sleep 30
 
-      - name: Check if juice-shop is up
+      - name: Check if Juice Shop is up
         run: curl http://localhost:3000/rest/products/search?q=
 
       - name: Build Integration-Test Docker image from Dockerfile
-        run: docker build -t jucie-shop-test .
+        run: docker build -t juice-shop-test .
 
       - name: Run Integration-Test container from built image
-        run: docker run -d jucie-shop-test
+        run: docker run -d --name integration-test-container juice-shop-test
+
+      - name: Copy Allure report from container to runner
+        run: |
+          docker cp integration-test-container:/target/site/allure-maven.html allure-maven.html
+
+      - name: Stop and remove integration-test container
+        run: |
+          docker stop integration-test-container
+          docker rm integration-test-container
+
+      - name: Upload Allure report as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-report
+          path: allure-maven.html
