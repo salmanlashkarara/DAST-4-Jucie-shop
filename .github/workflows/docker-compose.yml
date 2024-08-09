@@ -30,3 +30,20 @@ jobs:
         run: |
           docker run --rm --network test-network curlimages/curl:7.85.0 \
           curl http://juice-shop:3000/rest/products/search?q=
+
+      - name: Build Integration-Test Docker image from Dockerfile
+        run: docker build -t juice-shop-test .
+
+      - name: Run Integration-Test container in custom network
+        run: docker run -d --name integration-test-container --network test-network juice-shop-test
+
+      - name: Wait for tests to complete
+        run: sleep 60  # Adjust based on test duration
+
+      - name: Retrieve and display test logs
+        run: docker logs integration-test-container
+
+      - name: Copy Allure Report from Docker container
+        run: |
+          docker cp integration-test-container:/app/target/site/allure-report ./allure-report
+        continue-on-error: true
