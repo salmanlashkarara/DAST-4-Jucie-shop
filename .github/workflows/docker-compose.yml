@@ -30,4 +30,4 @@ jobs:
         run: docker build -t jucie-shop-test .
 
       - name: Run Integration-Test container from built image
-        run: docker run -d -p 4000:4000 jucie-shop-test
+        run: docker run -d jucie-shop-test
