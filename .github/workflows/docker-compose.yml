@@ -1,4 +1,4 @@
-name: Run Docker Compose
+name: Juice-Shop-Integration-Test
 
 on:
   workflow_dispatch:
