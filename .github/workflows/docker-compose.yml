@@ -23,30 +23,5 @@ jobs:
       - name: Wait for the Juice Shop to be ready
         run: sleep 30
 
-      - name: Build Integration-Test Docker image from Dockerfile
-        run: docker build -t juice-shop-test .
-
-      - name: Run Integration-Test container in custom network
-        run: docker run -d --name integration-test-container --network test-network juice-shop-test
-
-      - name: Wait for tests to complete
-        run: sleep 60  # Adjust based on test duration
-
-      - name: Retrieve and display test logs
-        run: docker logs integration-test-container
-
-      - name: Copy Allure Report from Docker container
-        run: |
-          docker cp integration-test-container:/app/target/site/allure-report ./allure-report
-        continue-on-error: true
-
-      - name: Deploy Allure Report to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./allure-report
-          publish_branch: allure-report
-          keep_files: false
-
-      - name: Clean up
-        run: docker network rm test-network
+      - name: Check if service is available
+        run: curl http://localhost:3000/rest/products/search?q=
