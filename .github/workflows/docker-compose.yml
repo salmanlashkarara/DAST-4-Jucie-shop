@@ -23,8 +23,10 @@ jobs:
       - name: Wait for the Juice Shop to be ready
         run: sleep 30
 
-      - name: Check if service is available
+      - name: Check if service is available from host
         run: curl http://localhost:3000/rest/products/search?q=
 
-      - name: Check if juice-shop is available
-        run: curl http://juice-shop:3000/rest/products/search?q=
+      - name: Check if juice-shop is available from within the network
+        run: |
+          docker run --rm --network test-network curlimages/curl:7.85.0 \
+          curl http://juice-shop:3000/rest/products/search?q=
