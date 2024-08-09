@@ -20,5 +20,8 @@ jobs:
       - name: check curl version
         run: curl --version
 
+      - name: Wait for the Juice Shop to be ready
+        run: sleep 30
+
       - name: check if juice-shop is up
         run: curl http://localhost:3000/rest/products/search?q=
