@@ -1,6 +1,7 @@
 package org.juice_shop.products.requests;
 
 import io.qameta.allure.Step;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import lombok.AccessLevel;
@@ -11,7 +12,7 @@ import org.juice_shop.products.resources.ProductResources;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ProductRequests {
 
-  private static final String LOCAL_HOST = "http://juice-shop-service:3000";
+  private static final String LOCAL_HOST = "http://localhost:3000";
 
   @Step("Update single product")
   public static void updateProduct(int productId, String payload) {
@@ -19,6 +20,7 @@ public class ProductRequests {
 
     RestAssured
         .given()
+        .filters(new AllureRestAssured())
         .header("Content-Type", "application/json")
         .baseUri(LOCAL_HOST)
         .basePath(path)
@@ -39,6 +41,7 @@ public class ProductRequests {
 
     return RestAssured
         .given()
+        .filters(new AllureRestAssured())
         .header("Content-Type", "application/json")
         .baseUri(LOCAL_HOST)
         .basePath(path)

@@ -32,10 +32,11 @@
 
     <!-- We need this dependency to call .filter(new AllureRestAssured()) on restassured requests -->
     <dependency>
-      <artifactId>allure-rest-assured</artifactId>
       <groupId>io.qameta.allure</groupId>
-      <version>2.27.0</version>
+      <artifactId>allure-rest-assured</artifactId>
+      <version>2.19.0</version>
     </dependency>
+
 
     <dependency>
       <artifactId>lombok</artifactId>
