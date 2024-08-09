@@ -14,23 +14,20 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Run Juice-shop on port 3000
-        run: docker run -d -p 3000:3000 bkimminich/juice-shop
+      - name: Create Docker Network
+        run: docker network create test-network
 
-      - name: Check curl version
-        run: curl --version
+      - name: Run Juice-shop on port 3000 in custom network
+        run: docker run -d --name juice-shop --network test-network -p 3000:3000 bkimminich/juice-shop
 
       - name: Wait for the Juice Shop to be ready
         run: sleep 30
 
-      - name: Check if Juice Shop is up
-        run: curl http://localhost:3000/rest/products/search?q=
-
       - name: Build Integration-Test Docker image from Dockerfile
         run: docker build -t juice-shop-test .
 
-      - name: Run Integration-Test container from built image
-        run: docker run -d --name integration-test-container juice-shop-test
+      - name: Run Integration-Test container in custom network
+        run: docker run -d --name integration-test-container --network test-network juice-shop-test
 
       - name: Wait for tests to complete
         run: sleep 60  # Adjust based on test duration
@@ -50,3 +47,6 @@ jobs:
           publish_dir: ./allure-report
           publish_branch: allure-report
           keep_files: false
+
+      - name: Clean up
+        run: docker network rm test-network
