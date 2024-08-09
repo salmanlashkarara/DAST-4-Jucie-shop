@@ -23,5 +23,11 @@ jobs:
       - name: Wait for the Juice Shop to be ready
         run: sleep 30
 
-      - name: check if juice-shop is up
+      - name: Check if juice-shop is up
         run: curl http://localhost:3000/rest/products/search?q=
+
+      - name: Build Integration-Test Docker image from Dockerfile
+        run: docker build -t jucie-shop-test .
+
+      - name: Run Integration-Test container from built image
+        run: docker run -d -p 4000:4000 jucie-shop-test
