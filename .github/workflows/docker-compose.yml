@@ -33,10 +33,11 @@ jobs:
         run: docker run -d --name integration-test-container juice-shop-test
 
       - name: Wait for tests to complete
-        run: sleep 30  # Adjust or remove if you have a better way to wait
+        run: sleep 60  # Adjust based on test duration
 
-      - name: Copy Allure report from container to runner
-        run: docker cp integration-test-container:/app/target/site/allure-maven.html allure-maven.html
+      - name: Copy Allure report directory from container to runner
+        run: |
+          docker cp integration-test-container:/app/target target
 
       - name: Stop and remove integration-test container
         run: |
@@ -47,4 +48,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: allure-report
-          path: allure-maven.html
+          path: target
