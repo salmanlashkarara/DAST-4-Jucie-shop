@@ -37,11 +37,11 @@ jobs:
       - name: Run Integration-Test container in custom network
         run: docker run -d --name integration-test-container --network test-network juice-shop-test
 
-      - name: Debug network connections
-        run: docker exec -it integration-test-container ping -c 4 juice-shop
+      #- name: Debug network connections
+      #  run: docker exec -it integration-test-container ping -c 4 juice-shop
 
-      - name: Wait for tests to complete
-        run: sleep 60  # Adjust based on test duration
+      #- name: Wait for tests to complete
+      #  run: sleep 60  # Adjust based on test duration
 
       - name: Retrieve and display test logs
         run: docker logs integration-test-container
