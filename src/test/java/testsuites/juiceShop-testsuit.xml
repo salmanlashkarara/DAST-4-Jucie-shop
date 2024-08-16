@@ -4,6 +4,7 @@
     <classes>
       <class name="org.juice_shop.UpdateProductTest"/>
       <class name="org.juice_shop.AuthenticationTest"/>
+      <class name="org.juice_shop.DynamicApplicationSecurityTest"/>
     </classes>
   </test>
 </suite>
