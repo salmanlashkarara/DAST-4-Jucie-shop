@@ -12,7 +12,8 @@ import org.juice_shop.authentication.resources.AuthenticationResources;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AuthenticationRequests {
 
-  private static final String LOCAL_HOST = "http://172.18.0.2:3000";
+  private static final String JUICE_SHOP_HOST = "http://172.18.0.2:3000";
+  private static final String ZAP_HOST = "172.18.0.4:9090";
 
   @Step("Get Admin Token")
   public static Response getAdminToken(String payload) {
@@ -22,8 +23,9 @@ public class AuthenticationRequests {
         .given()
         .filters(new AllureRestAssured())
         .header("Content-Type", "application/json")
-        .baseUri(LOCAL_HOST)
+        .baseUri(JUICE_SHOP_HOST)
         .basePath(path)
+        .proxy(ZAP_HOST)
         .when()
         .body(payload)
         .post()

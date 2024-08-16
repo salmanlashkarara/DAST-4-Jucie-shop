@@ -13,6 +13,7 @@ import org.juice_shop.products.resources.ProductResources;
 public class ProductRequests {
 
   private static final String LOCAL_HOST = "http://172.18.0.2:3000";
+  private static final String ZAP_HOST = "172.18.0.4:9090";
 
   @Step("Update single product")
   public static void updateProduct(int productId, String payload) {
@@ -25,6 +26,7 @@ public class ProductRequests {
         .baseUri(LOCAL_HOST)
         .basePath(path)
         .pathParam("id", productId)
+        .proxy(ZAP_HOST)
         .when()
         .body(payload)
         .put()
@@ -45,6 +47,7 @@ public class ProductRequests {
         .header("Content-Type", "application/json")
         .baseUri(LOCAL_HOST)
         .basePath(path)
+        .proxy(ZAP_HOST)
         .when()
         .get()
         .then()
