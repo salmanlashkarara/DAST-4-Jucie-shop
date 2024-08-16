@@ -1,5 +1,10 @@
 package org.juice_shop.products.requests;
 
+import static org.juice_shop.Environment.JUICE_SHOP_IP;
+import static org.juice_shop.Environment.JUICE_SHOP_PORT;
+import static org.juice_shop.Environment.ZAP_IP;
+import static org.juice_shop.Environment.buildUrl;
+
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
@@ -12,8 +17,7 @@ import org.juice_shop.products.resources.ProductResources;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ProductRequests {
 
-  private static final String LOCAL_HOST = "http://172.18.0.2:3000";
-  private static final String ZAP_HOST = "http://172.18.0.4:9090";
+  private static final String JUICE_SHOP_HOST = buildUrl(JUICE_SHOP_IP, JUICE_SHOP_PORT);
 
   @Step("Update single product")
   public static void updateProduct(int productId, String payload) {
@@ -23,10 +27,10 @@ public class ProductRequests {
         .given()
         .filters(new AllureRestAssured())
         .header("Content-Type", "application/json")
-        .baseUri(LOCAL_HOST)
+        .baseUri(JUICE_SHOP_HOST)
         .basePath(path)
         .pathParam("id", productId)
-        .proxy(ZAP_HOST)
+        .proxy(ZAP_IP, 9090)
         .when()
         .body(payload)
         .put()
@@ -45,9 +49,9 @@ public class ProductRequests {
         .given()
         .filters(new AllureRestAssured())
         .header("Content-Type", "application/json")
-        .baseUri(LOCAL_HOST)
+        .baseUri(JUICE_SHOP_HOST)
         .basePath(path)
-        .proxy(ZAP_HOST)
+        .proxy(ZAP_IP, 9090)
         .when()
         .get()
         .then()
