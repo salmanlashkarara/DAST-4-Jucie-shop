@@ -102,19 +102,6 @@
       <version>5.4.0</version>
     </dependency>
 
-    <!-- is used for comparing to lists CollectionUtils.isEqualCollection -->
-    <dependency>
-      <artifactId>commons-validator</artifactId>
-      <groupId>commons-validator</groupId>
-      <version>1.9.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-text</artifactId>
-      <version>1.12.0</version>
-    </dependency>
-
   </dependencies>
 
   <build>
