@@ -12,7 +12,7 @@ import org.juice_shop.authentication.resources.AuthenticationResources;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AuthenticationRequests {
 
-  private static final String LOCAL_HOST = "http://juice-shop:3000";
+  private static final String LOCAL_HOST = "http://172.18.0.2:3000";
 
   @Step("Get Admin Token")
   public static Response getAdminToken(String payload) {
