@@ -1,20 +1,23 @@
 package ZAP.requests;
 
 
+import static org.juice_shop.Environment.JUICE_SHOP_IP;
+import static org.juice_shop.Environment.JUICE_SHOP_PORT;
+import static org.juice_shop.Environment.ZAP_IP;
+import static org.juice_shop.Environment.ZAP_PORT;
+import static org.juice_shop.Environment.buildUrl;
+
 import ZAP.resources.ZapResource;
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
-import io.restassured.builder.ResponseSpecBuilder;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
 
 public class ZapRequest {
 
-  public static final String ZAP_URL = "http://zap";
+  //public static final String ZAP_URL = "http://zap";
+  private static final String ZAP_URL = buildUrl(ZAP_IP, ZAP_PORT);
   public static final String CONTEXT_NAME_parameter = "contextName";
 
   private ZapRequest() {

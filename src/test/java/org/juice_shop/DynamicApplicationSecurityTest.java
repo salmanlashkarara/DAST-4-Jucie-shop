@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 public class DynamicApplicationSecurityTest {
 
-  @Test(enabled = false)
+  @Test
   public void dast() {
     List<String> contexts = ZapHelper.getZapContexts().getContextList();
     String zapContextName = contexts.get(0);
