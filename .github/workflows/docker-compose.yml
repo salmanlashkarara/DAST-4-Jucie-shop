@@ -14,34 +14,14 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Create Docker Network
-        run: docker network create test-network
+      - name: Run Docker Compose
+        run: docker compose up
 
-      - name: Run Juice-shop on port 3000 in custom network
-        run: docker run -d --name juice-shop --network test-network -p 3000:3000 bkimminich/juice-shop
-
-      - name: Wait for the Juice Shop to be ready
-        run: sleep 30
-
-      - name: Check if service is available from host
-        run: curl http://localhost:3000/rest/products/search?q=
-
-      - name: Check if juice-shop is available from within the network
-        run: |
-          docker run --rm --network test-network curlimages/curl:7.85.0 \
-          curl http://juice-shop:3000/rest/products/search?q=
-
-      - name: Build Integration-Test Docker image from Dockerfile
-        run: docker build -t juice-shop-test .
-
-      - name: Run Integration-Test container in custom network
-        run: docker run -d --name integration-test-container --network test-network juice-shop-test
+      #- name: Check if service is available from host
+      #  run: curl http://localhost:3000/rest/products/search?q=
 
       #- name: Debug network connections
       #  run: docker exec -it integration-test-container ping -c 4 juice-shop
-
-      #- name: Wait for tests to complete
-      #  run: sleep 60  # Adjust based on test duration
 
       - name: Retrieve and display test logs
         run: docker logs integration-test-container
