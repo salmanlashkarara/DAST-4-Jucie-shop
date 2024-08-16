@@ -102,6 +102,13 @@
       <version>5.4.0</version>
     </dependency>
 
+    <dependency>
+      <!-- is used for waiting for API response -->
+      <artifactId>awaitility</artifactId>
+      <groupId>org.awaitility</groupId>
+      <version>4.2.1</version>
+    </dependency>
+
   </dependencies>
 
   <build>
