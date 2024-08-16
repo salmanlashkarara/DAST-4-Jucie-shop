@@ -14,19 +14,23 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Run Docker Compose
-        run: docker compose up
+      - name: Run Docker Compose in detached mode
+        run: docker compose up -d
 
-      #- name: Check if service is available from host
-      #  run: curl http://localhost:3000/rest/products/search?q=
+      - name: Wait for Juice Shop to be healthy
+        run: |
+          echo "Waiting for Juice Shop to become healthy..."
+          while ! docker inspect --format='{{json .State.Health.Status}}' juice-shop | grep "healthy"; do sleep 1; done
 
-      - name: Run Integration-Tests
+      - name: Run Integration Tests
         run: docker exec -it integration-tests mvn clean install site -DenvConfig=default -DsuiteFile=juiceShop-testsuit.xml -DremoteExecution=false -Dmaven.wagon.http.pool=false -Dhttp.keepAlive=false allure:report
 
       - name: Retrieve and display test logs
-        run: docker logs integration-test-container
+        run: docker logs integration-tests
 
       - name: Copy Allure Report from Docker container
-        run: |
-          docker cp integration-test-container:/app/target/site/allure-report ./allure-report
+        run: docker cp integration-tests:/app/target/site/allure-report ./allure-report
         continue-on-error: true
+
+      - name: Shutdown Docker Compose
+        run: docker compose down
