@@ -1,5 +1,10 @@
 package org.juice_shop.authentication.requests;
 
+import static org.juice_shop.Environment.JUICE_SHOP_IP;
+import static org.juice_shop.Environment.JUICE_SHOP_PORT;
+import static org.juice_shop.Environment.ZAP_IP;
+import static org.juice_shop.Environment.buildUrl;
+
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
@@ -12,8 +17,8 @@ import org.juice_shop.authentication.resources.AuthenticationResources;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AuthenticationRequests {
 
-  private static final String JUICE_SHOP_HOST = "http://172.18.0.2:3000";
-  private static final String ZAP_HOST = "http://172.18.0.4:9090";
+  private static final String JUICE_SHOP_HOST = buildUrl(JUICE_SHOP_IP, JUICE_SHOP_PORT);
+
 
   @Step("Get Admin Token")
   public static Response getAdminToken(String payload) {
@@ -25,7 +30,7 @@ public class AuthenticationRequests {
         .header("Content-Type", "application/json")
         .baseUri(JUICE_SHOP_HOST)
         .basePath(path)
-        .proxy(ZAP_HOST)
+        .proxy(ZAP_IP, 9090)
         .when()
         .body(payload)
         .post()
