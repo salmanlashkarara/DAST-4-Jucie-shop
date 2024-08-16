@@ -28,6 +28,8 @@ services:
       context: .
       dockerfile: Dockerfile-ZAP
     container_name: ZAP
+    ports:
+      - "9090:9090"
     networks:
       test-net:
         ipv4_address: 172.18.0.4
