@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 public class AuthenticationTest {
 
   @Test
-  public void authenticationTest  () throws JsonProcessingException {
+  public void authenticationTest  () {
     String token = AuthenticationHelper.getAuthenticationToken();
     Assert.assertNotNull(token);
   }
