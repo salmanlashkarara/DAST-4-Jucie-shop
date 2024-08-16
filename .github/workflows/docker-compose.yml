@@ -23,7 +23,7 @@ jobs:
       #    while ! docker inspect --format='{{json .State.Health.Status}}' juice-shop | grep "healthy"; do sleep 1; done
 
       - name: Run Integration Tests
-        run: docker exec -it integration-tests mvn clean install site -DenvConfig=default -DsuiteFile=juiceShop-testsuit.xml -DremoteExecution=false -Dmaven.wagon.http.pool=false -Dhttp.keepAlive=false allure:report
+        run: docker exec integration-tests mvn clean install site -DenvConfig=default -DsuiteFile=juiceShop-testsuit.xml -DremoteExecution=false -Dmaven.wagon.http.pool=false -Dhttp.keepAlive=false allure:report
 
       - name: Retrieve and display test logs
         run: docker logs integration-tests
