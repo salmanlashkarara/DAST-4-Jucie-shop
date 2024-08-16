@@ -31,12 +31,12 @@
   <dependencies>
 
     <!-- We need this dependency to call .filter(new AllureRestAssured()) on restassured requests -->
-    <!--
+
     <dependency>
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-rest-assured</artifactId>
       <version>2.19.0</version>
-    </dependency>-->
+    </dependency>
 
 
     <dependency>
@@ -82,13 +82,12 @@
 
     <!-- required by Allure web view -->
     <!-- required by Allure web view -->
-    <!--
     <dependency>
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-testng</artifactId>
       <scope>test</scope>
       <version>2.27.0</version>
-    </dependency>-->
+    </dependency>
 
     <!-- is used to create payload from JSON -->
     <dependency>
@@ -114,21 +113,6 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-text</artifactId>
       <version>1.12.0</version>
-    </dependency>
-
-    <!-- Dependencies related to API coverage -->
-
-    <!-- OpenApi parser -->
-
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-core</artifactId>
-      <version>2.17.1</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.17.1</version>
     </dependency>
 
   </dependencies>
@@ -192,15 +176,15 @@
               </suiteXmlFiles>
               <systemPropertyVariables>
                 <environment>${envConfig}</environment>
-                <!--<allure.results.directory>target/allure-results</allure.results.directory>-->
+                <allure.results.directory>target/allure-results</allure.results.directory>
               </systemPropertyVariables>
-              <!--
+
               <argLine>
                 -Xms500m -Xmx4096m -XX:MaxMetaspaceSize=256m -XX:ReservedCodeCacheSize=256m
                 -XX:MaxDirectMemorySize=3072m -Xshare:off
                 -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
               </argLine>
-              -->
+
               <testFailureIgnore>true</testFailureIgnore>
               <useSystemClassLoader>false</useSystemClassLoader>
             </configuration>
@@ -224,7 +208,7 @@
     </plugins>
 
   </build>
-  <!--
+
   <reporting>
     <excludeDefaults>true</excludeDefaults>
     <plugins>
@@ -240,5 +224,5 @@
 
     </plugins>
   </reporting>
-  -->
+
 </project>
