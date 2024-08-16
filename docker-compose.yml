@@ -9,14 +9,6 @@ services:
     networks:
       test-net:
         ipv4_address: 172.18.0.2
-        aliases:
-          - juice-shop-service
-    #healthcheck:
-    #  test: [ "CMD-SHELL", "curl -f -X GET http://localhost:3000/rest/products/search?q= || exit 1" ]
-    #  interval: 10s
-    #  retries: 5
-    #  start_period: 30s
-    #  timeout: 5s
 
   integration-tests:
     build:
@@ -26,6 +18,12 @@ services:
     networks:
       test-net:
         ipv4_address: 172.18.0.3
+    deploy:
+      resources:
+        limits:
+          memory: 2g  # Set memory limit to 2GB
+
+
 
 
 networks:
