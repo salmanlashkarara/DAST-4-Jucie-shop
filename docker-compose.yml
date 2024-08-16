@@ -23,8 +23,14 @@ services:
         limits:
           memory: 2g  # Set memory limit to 2GB
 
-
-
+  zap-proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile-ZAP
+    container_name: ZAP
+    networks:
+      test-net:
+        ipv4_address: 172.18.0.4
 
 networks:
   test-net:
