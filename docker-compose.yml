@@ -8,6 +8,7 @@ services:
       - "3000:3000"
     networks:
       test-net:
+        ipv4_address: 172.18.0.2
         aliases:
           - juice-shop-service
     healthcheck:
@@ -26,18 +27,13 @@ services:
       juice-shop:
         condition: service_healthy
     networks:
-      - test-net
-
-  zap-proxy:
-    build:
-      context: .
-      dockerfile: Dockerfile-ZAP
-    container_name: ZAP
-    networks:
       test-net:
-        aliases:
-          - zap-service
+        ipv4_address: 172.18.0.3
+
 
 networks:
   test-net:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
