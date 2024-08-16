@@ -2,9 +2,9 @@
 FROM maven:3.8.7-openjdk-18
 
 # Install needed tool for debuging
-RUN microdnf update -y && \
-    microdnf install -y curl iputils && \
-    microdnf clean all
+#RUN microdnf update -y && \
+#    microdnf install -y curl iputils && \
+#    microdnf clean all
 
 # Set the working directory inside the container
 WORKDIR /app

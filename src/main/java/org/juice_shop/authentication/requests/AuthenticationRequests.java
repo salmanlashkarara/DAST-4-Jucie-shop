@@ -13,7 +13,7 @@ import org.juice_shop.authentication.resources.AuthenticationResources;
 public class AuthenticationRequests {
 
   private static final String JUICE_SHOP_HOST = "http://172.18.0.2:3000";
-  private static final String ZAP_HOST = "172.18.0.4:9090";
+  private static final String ZAP_HOST = "http://172.18.0.4:9090";
 
   @Step("Get Admin Token")
   public static Response getAdminToken(String payload) {
