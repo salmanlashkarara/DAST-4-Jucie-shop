@@ -13,7 +13,7 @@ import org.juice_shop.authentication.requests.AuthenticationRequests;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AuthenticationHelper {
 
-  public static String getAuthenticationToken() throws JsonProcessingException {
+  public static String getAuthenticationToken() {
     AuthenticationRequestBody authenticationRequestBody = new AuthenticationRequestBody();
     String payload = Utils.serializeToJson(authenticationRequestBody);
     Response res = AuthenticationRequests.getAdminToken(payload);
