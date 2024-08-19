@@ -35,7 +35,7 @@ public class ZapRequest {
         .baseUri(ZAP_URL)
         .basePath(path)
         .queryParam(CONTEXT_NAME_parameter, contextName)
-        //.queryParam("regex", ".*(service1|service2|service3).*") // Include only these services for scanning
+        .queryParam("regex", ".*172\\.18\\.0\\.2.*") // Include only these services for scanning
         .when()
         .get()
         .then()
@@ -55,8 +55,8 @@ public class ZapRequest {
         .header("Content-Type", "application/json")
         .baseUri(ZAP_URL)
         .basePath(path)
-        .queryParam("inScopeOnly", true)
         .queryParam("contextId", contextId)
+        .queryParam("inScopeOnly", true)
         .when()
         .get()
         .then()

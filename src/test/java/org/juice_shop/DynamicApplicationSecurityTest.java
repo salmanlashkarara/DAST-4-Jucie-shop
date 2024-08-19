@@ -25,8 +25,8 @@ public class DynamicApplicationSecurityTest {
 
     // Get and update the risk level of false-positive alerts
 
-    Set<Alert> alertsToIgnore = ZapHelper.selectFalsePositiveAlerts();
-    ZapHelper.labelAlertsAsFalsePositive(alertsToIgnore);
+    //Set<Alert> alertsToIgnore = ZapHelper.selectFalsePositiveAlerts();
+    //ZapHelper.labelAlertsAsFalsePositive(alertsToIgnore);
 
     ZapHelper.saveHtmlReport();
   }
