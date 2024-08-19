@@ -1,8 +1,6 @@
 package ZAP.requests;
 
 
-import static org.juice_shop.Environment.JUICE_SHOP_IP;
-import static org.juice_shop.Environment.JUICE_SHOP_PORT;
 import static org.juice_shop.Environment.ZAP_IP;
 import static org.juice_shop.Environment.ZAP_PORT;
 import static org.juice_shop.Environment.buildUrl;
@@ -16,9 +14,8 @@ import org.apache.http.HttpStatus;
 
 public class ZapRequest {
 
-  //public static final String ZAP_URL = "http://zap";
-  private static final String ZAP_URL = buildUrl(ZAP_IP, ZAP_PORT);
   public static final String CONTEXT_NAME_parameter = "contextName";
+  private static final String ZAP_URL = buildUrl(ZAP_IP, ZAP_PORT);
 
   private ZapRequest() {
   }
@@ -36,6 +33,7 @@ public class ZapRequest {
         .basePath(path)
         .queryParam(CONTEXT_NAME_parameter, contextName)
         .queryParam("regex", ".*172\\.18\\.0\\.2.*") // Include only these services for scanning
+        .queryParam("apikey", "your_api_key_here")
         .when()
         .get()
         .then()
@@ -57,6 +55,7 @@ public class ZapRequest {
         .basePath(path)
         .queryParam("contextId", contextId)
         .queryParam("inScopeOnly", true)
+        .queryParam("apikey", "your_api_key_here")
         .when()
         .get()
         .then()
@@ -78,6 +77,7 @@ public class ZapRequest {
         .basePath(path)
         .queryParam("inScopeOnly", true)
         .param("scanId", scanId)
+        .queryParam("apikey", "your_api_key_here")
         .when()
         .get()
         .then()
@@ -98,6 +98,7 @@ public class ZapRequest {
         .baseUri(ZAP_URL)
         .basePath(path)
         .queryParam("inScopeOnly", true)
+        .queryParam("apikey", "your_api_key_here")
         .when()
         .get()
         .then()
@@ -117,6 +118,7 @@ public class ZapRequest {
         .baseUri(ZAP_URL)
         .basePath(path)
         .param(CONTEXT_NAME_parameter, zapContextName)
+        .queryParam("apikey", "your_api_key_here")
         .when()
         .get()
         .then()
@@ -136,6 +138,7 @@ public class ZapRequest {
         .header("Content-Type", "application/json")
         .baseUri(ZAP_URL)
         .basePath(path)
+        .queryParam("apikey", "your_api_key_here")
         .when()
         .get()
         .then()
@@ -154,6 +157,7 @@ public class ZapRequest {
         .header("Content-Type", "application/json")
         .baseUri(ZAP_URL)
         .basePath(path)
+        .queryParam("apikey", "your_api_key_here")
         .when()
         .get()
         .then()
@@ -176,6 +180,7 @@ public class ZapRequest {
         .queryParam("riskId", 0)
         .queryParam("confidenceId", 0)
         .queryParam("description", "False-positive alert")
+        .queryParam("apikey", "your_api_key_here")
         .when()
         .get()
         .then()
@@ -194,6 +199,7 @@ public class ZapRequest {
         .baseUri(ZAP_URL)
         .basePath(path)
         .queryParam("ids", messageId)
+        .queryParam("apikey", "your_api_key_here")
         .when()
         .get()
         .then()
