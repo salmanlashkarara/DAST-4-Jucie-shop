@@ -27,7 +27,7 @@ This testing process is split into two key steps:
 
 ## DAST Report
 The DAST tool generates an HTML report, and you can see an example of this report in the attachment.
-
+![img_2.png](img_2.png)
 ---
 ## API description 
 If you want to communicate with ZAP in daemon mode, you can use the following REST APIs. Please adjust the host and port settings as needed.
