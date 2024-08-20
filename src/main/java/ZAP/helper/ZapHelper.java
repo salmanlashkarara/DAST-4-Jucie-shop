@@ -25,7 +25,7 @@ import org.awaitility.core.ConditionEvaluationLogger;
 public class ZapHelper {
 
 
-  public static final String REPORT_FILE_PATH = "./penetration-report/dast-report.html";
+  public static final String REPORT_FILE_PATH = "./DAST-report/dast-report.html";
   private static final List<String> FALSE_POSITIVE_ALERTS_NAMES = List.of("SQL Injection");
 
   private ZapHelper() {
