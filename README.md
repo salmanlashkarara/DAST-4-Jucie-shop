@@ -46,28 +46,40 @@ Get list of created ZAP contexts ! At the very beginning of the test, before you
 Include the services which must be scanned ! This step limits the number of services that need to be scanned, thereby reducing the runtime of test:
 
 - `curl -X GET "http://ZapHost:9090/JSON/context/action/includeInContext/?contextName=Default Context&regex=".*(service3|service2|service1).*""`
+
 - --
+
 Get Id of created context ! To trigger the scan, we need to know the ID of the context within the ZAP service.
 
--`curl -X GET "http://ZapHost:9090/JSON/context/view/context/?contextName=ZAP_CONTEXT"`
+- `curl -X GET "http://ZapHost:9090/JSON/context/view/context/?contextName=ZAP_CONTEXT"`
+
 - --
+
 Trigger an active scan on context ! This request triggers an active scan based on the created context. Please make sure you have permission to perform such a scan on the target services.
 
--`curl -X GET "http://ZapHost:9090/JSON/ascan/action/scan/?contextId=1"`
+- `curl -X GET "http://ZapHost:9090/JSON/ascan/action/scan/?contextId=1"`
+
 - --
+
 Wait until scan is 100% completed ! Usually, ZAP performs many different tests on target URLs, which can take some time to complete. Therefore, we need to wait and consistently check its progress.
 
--`curl -X GET "http://ZapHost:9090/JSON/ascan/view/status/?scanId=1"`
+- `curl -X GET "http://ZapHost:9090/JSON/ascan/view/status/?scanId=1"`
+
 - --
+
 Get all alerts ! Not all the findings from ZAP might be valid, so it makes sense to get a list of all detected vulnerabilities and in the next step, we can label any false-positive alerts.
 
--`curl -X GET "http://ZapHost:9090/JSON/core/view/alerts/"`
+- `curl -X GET "http://ZapHost:9090/JSON/core/view/alerts/"`
+
 - --
+
 Ignore the false-positive alerts in the scan using the IDs of the alerts.
 
--`curl -X GET
+- `curl -X GET
 "http://ZapHost:9090/JSON/alert/action/updateAlert/?id=0&confidenceId=0&name="Ignored alert"&riskId=0&description="False-positive alert"`
+
 - --
+
 Generate report! Like any other test execution, it makes sense to generate an HTML report of the test. This way, you can include it as an artifact of the CI/CD pipeline.
 
 -`curl -X GET "http://ZapHost:9090/OTHER/core/other/htmlreport/"`
