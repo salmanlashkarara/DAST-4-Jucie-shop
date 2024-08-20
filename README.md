@@ -82,4 +82,4 @@ Ignore the false-positive alerts in the scan using the IDs of the alerts.
 
 Generate report! Like any other test execution, it makes sense to generate an HTML report of the test. This way, you can include it as an artifact of the CI/CD pipeline.
 
--`curl -X GET "http://ZapHost:9090/OTHER/core/other/htmlreport/"`
+- `curl -X GET "http://ZapHost:9090/OTHER/core/other/htmlreport/"`
