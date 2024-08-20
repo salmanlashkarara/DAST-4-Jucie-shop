@@ -17,19 +17,19 @@ This testing process is split into two key steps:
     - We start by sending requests to the various APIs of the Juice-Shop app.
     - As these requests are made, the ZAP proxy steps in to intercept and monitor them.
 
-    - ![img.png](img.png)
+    - ![img.png](src/main/resources/readMe-images/img.png)
 
 2. **Vulnerability Scanning with ZAP**:
     - After the functionality tests are complete, we move on to the DAST phase.
     - In this phase, ZAP thoroughly scans the Juice-Shop app to uncover any security vulnerabilities.
-    - ![img_1.png](img_1.png)
+    - ![img_1.png](src/main/resources/readMe-images/img_1.png)
 
 
 ## DAST Report
 
 The DAST tool generates an HTML report, and you can see an example of this report in the attachment.
 
-![img_2.png](img_2.png)
+![img_2.png](src/main/resources/readMe-images/img_2.png)
 
 ---
 ## API description 
