@@ -23,8 +23,12 @@ jobs:
       - name: Retrieve and display test logs
         run: docker logs integration-tests
 
-      - name: Copy Allure Report from Docker container
-        run: docker cp integration-tests:/app/target/site/allure-report ./allure-report
+      #- name: Copy Allure Report from Docker container
+      #  run: docker cp integration-tests:/app/target/site/allure-report ./allure-report
+      #  continue-on-error: true
+
+      - name: Copy DAST Report from Docker container
+        run: docker cp integration-tests:/app/DAST-report ./DAST-report
         continue-on-error: true
 
       - name: Shutdown Docker Compose
