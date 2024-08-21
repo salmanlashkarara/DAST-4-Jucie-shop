@@ -1,10 +1,8 @@
 package org.juice_shop;
 
 import ZAP.helper.ZapHelper;
-import ZAP.models.Alert;
 import ZAP.requests.ZapRequest;
 import java.util.List;
-import java.util.Set;
 import org.testng.annotations.Test;
 
 public class DynamicApplicationSecurityTest {

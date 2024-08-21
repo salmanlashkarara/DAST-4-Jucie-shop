@@ -17,6 +17,9 @@ jobs:
       - name: Run Docker Compose in detached mode
         run: docker compose up -d
 
+      - name: Wait for services to start
+        run: sleep 60
+
       - name: Run Integration Tests
         run: docker exec integration-tests mvn clean install site -DenvConfig=default -DsuiteFile=juiceShop-testsuit.xml -DremoteExecution=false -Dmaven.wagon.http.pool=false -Dhttp.keepAlive=false allure:report
 
