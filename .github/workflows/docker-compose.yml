@@ -14,13 +14,16 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
+      - name: Build the integration test image
+        run: docker build -f Dockerfile-Integration-Test -t my-integration-test-image .
+
       - name: Run Docker Compose in detached mode
         run: docker compose up -d
 
       - name: Wait for services to start
-        run: sleep 60
+        run: sleep 5
 
-      - name: Start Integration Test Container
+      - name: Run integration-tests container
         run: docker run --name integration-tests my-integration-test-image
 
       - name: Retrieve and display test logs
