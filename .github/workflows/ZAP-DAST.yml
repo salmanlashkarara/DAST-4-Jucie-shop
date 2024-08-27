@@ -18,13 +18,13 @@ jobs:
         run: docker compose up -d
 
       - name: Wait for services to start
-        run: sleep 5
+        run: sleep 30
 
       - name: Build the integration test image
         run: docker build -f Dockerfile-Integration-Test -t my-integration-test-image .
 
       - name: Run integration-tests container
-        run: docker run --name integration-tests my-integration-test-image
+        run: docker run --name integration-tests --network juice-shop-test_test-net my-integration-test-image
 
       - name: Retrieve and display test logs
         run: docker logs integration-tests
@@ -34,8 +34,14 @@ jobs:
       #  continue-on-error: true
 
       - name: Copy DAST Report from Docker container
-        run: docker cp integration-tests:/app/DAST-report ./DAST-report
+        run: docker cp integration-tests:/app/DAST-report ./
         continue-on-error: true
+
+      - name: Upload DAST report artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: dast-report
+          path: ./DAST-report/dast-report.html
 
       - name: Shutdown Docker Compose
         run: docker compose down
