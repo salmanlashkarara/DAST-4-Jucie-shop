@@ -33,28 +33,34 @@ jobs:
         run: docker cp integration-tests:/app/target/site/allure-report ./allure-report
         continue-on-error: true
 
-      - name: Get Allure history
-        uses: actions/checkout@v2
-        if: always()
+      - name: Upload Allure report artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-report
+          path: ./allure-report
+
+      - name: Copy DAST Report from Docker container
+        run: docker cp integration-tests:/app/DAST-report ./
         continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
 
-      - name: Allure Report action from marketplace
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        id: allure-report
+      - name: Upload DAST report artifact
+        uses: actions/upload-artifact@v3
         with:
-          allure_results: target/allure-results
-          gh_pages: gh-pages
-          allure_report: allure-report
-          allure_history: allure-history
+          name: dast-report
+          path: ./DAST-report/dast-report.html
 
-      - name: Deploy report to Github Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
+      - name: Shutdown Docker Compose
+        run: docker compose down
+
+      # Setup for GitHub Pages deployment
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+
+      - name: Upload Allure report to Pages artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./allure-report # Upload the Allure report directory
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
+        id: deployment
