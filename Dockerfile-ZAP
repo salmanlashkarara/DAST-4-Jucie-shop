@@ -3,12 +3,12 @@ FROM softwaresecurityproject/zap-bare
 ENV ZAP_AUTO_UPDATE=false
 
 # Define an environment variable for the API key
-ENV ZAP_API_KEY=your_api_key_here
+ENV ZAP_API_KEY=d62b2555-ff68-4e51-82de-9bbe195761f4
 
 EXPOSE 9090
 
 CMD ["sh", "-c", "nohup zap.sh -daemon -port 9090 \
--config api.key=$ZAP_API_KEY \
+-config api.key=${ZAP_API_KEY} \
 -config api.addrs.addr.name=.* \
 -config api.addrs.addr.regex=true \
 -config view.mode=attack \
@@ -17,4 +17,4 @@ CMD ["sh", "-c", "nohup zap.sh -daemon -port 9090 \
 -config network.connection.timeOutInSecs=120 \
 -config network.httpState.timeoutInSecs=120 \
 -config log.level=DEBUG & \
-sleep 60 && curl 'http://localhost:9090/JSON/context/action/newContext/?contextName=ZAP_CONTEXT&apikey=$ZAP_API_KEY' && tail -f /dev/null"]
+sleep 30 && curl \"http://localhost:9090/JSON/context/action/newContext/?contextName=ZAP_CONTEXT&apikey=${ZAP_API_KEY}\" && tail -f /dev/null"]

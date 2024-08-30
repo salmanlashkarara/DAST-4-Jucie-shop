@@ -16,7 +16,7 @@ COPY pom.xml /app/
 COPY src /app/src
 
 # Define the entry point to run the tests
-RUN mvn clean install site -DenvConfig=default -DsuiteFile=juiceShop-testsuit.xml -DremoteExecution=false -Dmaven.wagon.http.pool=false -Dhttp.keepAlive=false allure:report
+CMD mvn clean install site -DenvConfig=default -DsuiteFile=juiceShop-testsuit.xml -DremoteExecution=false -Dmaven.wagon.http.pool=false -Dhttp.keepAlive=false allure:report
 
 # Keep container alive
 #CMD ["tail", "-f", "/dev/null"]
