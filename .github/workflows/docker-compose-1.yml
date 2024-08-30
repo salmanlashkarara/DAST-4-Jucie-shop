@@ -33,39 +33,28 @@ jobs:
         run: docker cp integration-tests:/app/target/site/allure-report ./allure-report
         continue-on-error: true
 
-      - name: Upload Allure report artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: allure-report
-          path: ./allure-report
-
-      - name: Copy DAST Report from Docker container
-        run: docker cp integration-tests:/app/DAST-report ./
+      - name: Get Allure history
+        uses: actions/checkout@v2
+        if: always()
         continue-on-error: true
-
-      - name: Upload DAST report artifact
-        uses: actions/upload-artifact@v3
         with:
-          name: dast-report
-          path: ./DAST-report/dast-report.html
+          ref: gh-pages
+          path: gh-pages
 
-      - name: Shutdown Docker Compose
-        run: docker compose down
+      - name: Allure Report action from marketplace
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        id: allure-report
+        with:
+          allure_results: target/allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
 
-      - name: Deploy Allure Report to GitHub Pages
-        if: success() # Deploy only if the previous steps succeeded
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-
-          # Clone the `gh-pages` branch
-          git clone --branch gh-pages https://github.com/${{ github.repository }} gh-pages
-
-          # Copy the Allure report into the `gh-pages` directory
-          rsync -av --delete ./allure-report/ gh-pages/
-
-          # Commit and push the changes to the `gh-pages` branch
-          cd gh-pages
-          git add .
-          git commit -m "Update Allure report"
-          git push origin gh-pages
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
