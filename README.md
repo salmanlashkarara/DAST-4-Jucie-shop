@@ -2,20 +2,21 @@
 
 - [Juice-Shop Test Guide](#juice-shop-test-guide)
   - [What’s Covered in This Project?](#whats-covered-in-this-project)
-  - [How to use this repository?](#how-to-use-this-repository)
+  - [How to use this repository ?](#how-to-use-this-repository-)
   - [How Does It Work?](#how-does-it-work)
     - [Integration Testing with ZAP Interception](#integration-testing-with-zap-interception)
     - [Vulnerability Scanning with ZAP](#vulnerability-scanning-with-zap)
   - [DAST Report](#dast-report)
   - [API description](#api-description)
-    - [Get list of created ZAP contexts](#get-list-of-created-zap-contexts)
-    - [Include the services which must be scanned](#include-the-services-which-must-be-scanned)
-    - [Get Id of created context](#get-id-of-created-context)
-    - [Trigger an active scan on context](#trigger-an-active-scan-on-context)
-    - [Wait until scan is 100% completed](#wait-until-scan-is-100-completed)
-    - [Get all alerts](#get-all-alerts)
-    - [Ignore the false-positive alerts](#ignore-the-false-positive-alerts)
+    - [Get list of created ZAP contexts](#get-list-of-created-zap-contexts-)
+    - [Include the services which must be scanned](#include-the-services-which-must-be-scanned-)
+    - [Get Id of created context](#get-id-of-created-context-)
+    - [Trigger an active scan on context](#trigger-an-active-scan-on-context-)
+    - [Wait until scan is 100% completed](#wait-until-scan-is-100-completed-)
+    - [Get all alerts](#get-all-alerts-)
+    - [Ignore the false-positive alerts](#ignore-the-false-positive-alerts-in-the-scan-using-the-ids-of-the-alerts)
     - [Generate report](#generate-report)
+
 
 
 # Juice-Shop Test Guide
