@@ -5,7 +5,7 @@
   - [How Does It Work?](#how-does-it-work)
     - [Integration Testing with ZAP Interception](#integration-testing-with-zap-interception)
     - [Vulnerability Scanning with ZAP](#vulnerability-scanning-with-zap)
-- [ How to use this repository ?](#How-to-use-this-repository-?)
+- [How to use this repository?](#How-to-use-this-repository?)
 - [DAST Report](#dast-report)
 - [API Description](#api-description)
   - [Get List of Created ZAP Contexts](#get-list-of-created-zap-contexts)
