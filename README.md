@@ -5,6 +5,7 @@
   - [How Does It Work?](#how-does-it-work)
     - [Integration Testing with ZAP Interception](#integration-testing-with-zap-interception)
     - [Vulnerability Scanning with ZAP](#vulnerability-scanning-with-zap)
+- .[ How to use this repository ?](#How-to-use-this-repository-?)
 - [DAST Report](#dast-report)
 - [API Description](#api-description)
   - [Get List of Created ZAP Contexts](#get-list-of-created-zap-contexts)
@@ -27,6 +28,16 @@ Welcome to the Juice-Shop Test repository! This project is a straightforward exa
 In this project, you'll learn how to:
 - Test the REST APIs of the Juice-Shop app, a purposely vulnerable application.
 - Use the ZAP proxy to scan and identify vulnerabilities within the Juice-Shop app.
+
+### How to use this repository ?
+You can simply:
+- Open the Actions
+- Choose "Run Docker Compose"
+- Run the workflow
+- In a few minutes an API test will be run against jucie-shop app
+- When the build is successfull then download the ZAP report from artifacts
+![image](https://github.com/user-attachments/assets/063a5098-183b-41e6-8778-e6cf2558bf24)
+ 
 
 ### How Does It Work?
 
