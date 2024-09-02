@@ -1,3 +1,22 @@
+## Table of Contents
+
+- [Juice-Shop Test Guide](#juice-shop-test-guide)
+  - [What’s Covered in This Project?](#whats-covered-in-this-project)
+  - [How Does It Work?](#how-does-it-work)
+    - [Integration Testing with ZAP Interception](#integration-testing-with-zap-interception)
+    - [Vulnerability Scanning with ZAP](#vulnerability-scanning-with-zap)
+- [DAST Report](#dast-report)
+- [API Description](#api-description)
+  - [Get List of Created ZAP Contexts](#get-list-of-created-zap-contexts)
+  - [Include the Services Which Must Be Scanned](#include-the-services-which-must-be-scanned)
+  - [Get ID of Created Context](#get-id-of-created-context)
+  - [Trigger an Active Scan on Context](#trigger-an-active-scan-on-context)
+  - [Wait Until Scan is 100% Completed](#wait-until-scan-is-100-completed)
+  - [Get All Alerts](#get-all-alerts)
+  - [Ignore False-Positive Alerts](#ignore-false-positive-alerts)
+  - [Generate Report](#generate-report)
+
+
 # Juice-Shop Test Guide
 
 Welcome to the Juice-Shop Test repository! This project is a straightforward example of how to blend functionality testing with Dynamic Application Security Testing (DAST) using the ZAP tool. You can check out the [ZAP sample project](https://github.com/diconium/ZAP-sample-project) for a detailed explanation of the proxy setup.
