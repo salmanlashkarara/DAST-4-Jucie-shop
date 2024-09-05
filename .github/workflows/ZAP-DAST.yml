@@ -24,7 +24,7 @@ jobs:
         run: docker build -f Dockerfile-Integration-Test -t my-integration-test-image .
 
       - name: Run integration-tests container
-        run: docker run --name integration-tests --DAST-4-Jucie-shop_test-net my-integration-test-image
+        run: docker run --name integration-tests --network DAST-4-Jucie-shop_test-net my-integration-test-image
 
       - name: Retrieve and display test logs
         run: docker logs integration-tests
