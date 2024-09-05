@@ -1,3 +1,24 @@
+## Table of Contents
+
+- [Juice-Shop Test Guide](#juice-shop-test-guide)
+  - [What’s Covered in This Project?](#whats-covered-in-this-project)
+  - [How to use this repository ?](#how-to-use-this-repository-)
+  - [How Does It Work?](#how-does-it-work)
+    - [Integration Testing with ZAP Interception](#integration-testing-with-zap-interception)
+    - [Vulnerability Scanning with ZAP](#vulnerability-scanning-with-zap)
+  - [DAST Report](#dast-report)
+  - [API description](#api-description)
+    - [Get list of created ZAP contexts](#get-list-of-created-zap-contexts-)
+    - [Include the services which must be scanned](#include-the-services-which-must-be-scanned-)
+    - [Get Id of created context](#get-id-of-created-context-)
+    - [Trigger an active scan on context](#trigger-an-active-scan-on-context-)
+    - [Wait until scan is 100% completed](#wait-until-scan-is-100-completed-)
+    - [Get all alerts](#get-all-alerts-)
+    - [Ignore the false-positive alerts](#ignore-the-false-positive-alerts-in-the-scan-using-the-ids-of-the-alerts)
+    - [Generate report](#generate-report)
+
+
+
 # Juice-Shop Test Guide
 
 Welcome to the Juice-Shop Test repository! This project is a straightforward example of how to blend functionality testing with Dynamic Application Security Testing (DAST) using the ZAP tool. You can check out the [ZAP sample project](https://github.com/diconium/ZAP-sample-project) for a detailed explanation of the proxy setup.
@@ -8,6 +29,16 @@ Welcome to the Juice-Shop Test repository! This project is a straightforward exa
 In this project, you'll learn how to:
 - Test the REST APIs of the Juice-Shop app, a purposely vulnerable application.
 - Use the ZAP proxy to scan and identify vulnerabilities within the Juice-Shop app.
+
+### How to use this repository ?
+You can simply:
+- Open the Actions
+- Choose "Run Docker Compose"
+- Run the workflow
+- In a few minutes an API test will be run against jucie-shop app
+- When the build is successfull then download the ZAP report from artifacts
+![image](https://github.com/user-attachments/assets/063a5098-183b-41e6-8778-e6cf2558bf24)
+ 
 
 ### How Does It Work?
 
