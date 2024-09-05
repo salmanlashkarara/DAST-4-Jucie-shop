@@ -14,16 +14,19 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Build Docker images
-        run: docker compose build
-
       - name: Run Docker Compose in detached mode
         run: docker compose up -d
 
       - name: Wait for services to start
         run: sleep 30
 
-      - name: Retrieve and display integration test logs
+      - name: Build the integration test image
+        run: docker build -f Dockerfile-Integration-Test -t my-integration-test-image .
+
+      - name: Run integration-tests container
+        run: docker run --name integration-tests --network juice-shop-test_test-net my-integration-test-image
+
+      - name: Retrieve and display test logs
         run: docker logs integration-tests
 
       #- name: Copy Allure Report from Docker container
