@@ -10,6 +10,19 @@ services:
       test-net:
         ipv4_address: 172.18.0.2
 
+  #integration-tests:
+  #  build:
+  #    context: .
+  #    dockerfile: Dockerfile-Integration-Test
+  #  container_name: integration-tests
+  #  networks:
+  #    test-net:
+  #      ipv4_address: 172.18.0.3
+  #  deploy:
+  #    resources:
+  #      limits:
+  #        memory: 2g  # Set memory limit to 2GB
+
   zap-proxy:
     build:
       context: .
@@ -20,18 +33,6 @@ services:
     networks:
       test-net:
         ipv4_address: 172.18.0.4
-
-  integration-tests:
-    build:
-      context: .
-      dockerfile: Dockerfile-Integration-Test
-    depends_on:
-      - juice-shop
-      - zap-proxy
-    networks:
-      test-net:
-    environment:
-      - TEST_ENV_VAR=value
 
 networks:
   test-net:
